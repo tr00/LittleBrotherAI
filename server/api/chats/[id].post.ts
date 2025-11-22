@@ -7,7 +7,7 @@ import {
   stepCountIs,
   streamText
 } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
+import { createOpenRouter } from '@openrouter/ai-sdk-provider'
 import type { UIMessage } from 'ai'
 import { z } from 'zod'
 
@@ -20,6 +20,14 @@ defineRouteMeta({
 
 export default defineEventHandler(async (event) => {
   const session = await getUserSession(event)
+
+  // Check if API key exists in session
+  if (!session.openRouterApiKey) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'OpenRouter API key required'
+    })
+  }
 
   const { id } = await getValidatedRouterParams(
     event,
@@ -36,6 +44,11 @@ export default defineEventHandler(async (event) => {
     }).parse
   )
 
+  // Initialize OpenRouter with user's API key
+  const openrouter = createOpenRouter({
+    apiKey: session.openRouterApiKey
+  })
+
   const db = useDrizzle()
 
   const chat = await db.query.chats.findFirst({
@@ -51,7 +64,7 @@ export default defineEventHandler(async (event) => {
 
   if (!chat.title) {
     const { text: title } = await generateText({
-      model: gateway('openai/gpt-4o-mini'),
+      model: openrouter('openai/gpt-4o-mini'),
       system: `You are a title generator for a chat:
           - Generate a short title based on the first user's message
           - The title should be less than 30 characters long
@@ -79,7 +92,7 @@ export default defineEventHandler(async (event) => {
   const stream = createUIMessageStream({
     execute: ({ writer }) => {
       const result = streamText({
-        model: gateway(model),
+        model: openrouter(model),
         system: `You are a knowledgeable and helpful AI assistant. Your goal is to provide clear, accurate, and well-structured responses.
 
 **FORMATTING RULES (CRITICAL):**
@@ -111,10 +124,7 @@ export default defineEventHandler(async (event) => {
         },
         stopWhen: stepCountIs(5),
         experimental_transform: smoothStream({ chunking: 'word' }),
-        tools: {
-          weather: weatherTool,
-          chart: chartTool
-        }
+        tools: {}
       })
 
       if (!chat.title) {
