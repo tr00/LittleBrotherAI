@@ -32,3 +32,6 @@ jobs:
 
       - name: Typecheck
         run: pnpm run typecheck
+
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
