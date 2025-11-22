@@ -1,5 +1,5 @@
 {
-  "id": "4649a6e7-6b2e-4bbc-86c5-7d5bbaa2cd87",
+  "id": "4e354f2f-7847-4438-b0fc-8c0e6e17b26c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -20,9 +20,9 @@
           "primaryKey": false,
           "notNull": false
         },
-        "userId": {
-          "name": "userId",
-          "type": "varchar(36)",
+        "sessionId": {
+          "name": "sessionId",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
@@ -35,11 +35,11 @@
         }
       },
       "indexes": {
-        "chats_user_id_idx": {
-          "name": "chats_user_id_idx",
+        "chats_session_id_idx": {
+          "name": "chats_session_id_idx",
           "columns": [
             {
-              "expression": "userId",
+              "expression": "sessionId",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -132,101 +132,9 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
-    },
-    "public.users": {
-      "name": "users",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(36)",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "avatar": {
-          "name": "avatar",
-          "type": "varchar(500)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "username": {
-          "name": "username",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "provider": {
-          "name": "provider",
-          "type": "provider",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "providerId": {
-          "name": "providerId",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {
-        "users_provider_id_idx": {
-          "name": "users_provider_id_idx",
-          "columns": [
-            {
-              "expression": "provider",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "providerId",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
     }
   },
   "enums": {
-    "public.provider": {
-      "name": "provider",
-      "schema": "public",
-      "values": [
-        "github"
-      ]
-    },
     "public.role": {
       "name": "role",
       "schema": "public",
