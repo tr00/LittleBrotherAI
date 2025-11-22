@@ -88,6 +88,8 @@ onMounted(() => {
 
     <template #body>
       <UContainer class="flex-1 flex flex-col gap-4 sm:gap-6">
+        <SessionWarningBanner class="lg:pt-(--ui-header-height)" />
+
         <UChatMessages
           should-auto-scroll
           :messages="chat.messages"
