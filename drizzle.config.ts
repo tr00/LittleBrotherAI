@@ -1,4 +1,12 @@
-import { defineConfig } from 'drizzle-kit'
+import { defineConfig } from "drizzle-kit";
+
+const url = process.env.DATABASE_URL;
+
+if (!url) {
+  console.warn(
+    "DATABASE_URL not set — Drizzle will not run against Postgres in this environment.",
+  );
+}
 
 const url = process.env.DATABASE_URL
 
@@ -9,10 +17,10 @@ if (!url) {
 }
 
 export default defineConfig({
-  dialect: 'postgresql',
-  schema: './server/database/schema.ts',
-  out: './server/database/migrations',
+  dialect: "postgresql",
+  schema: "./server/database/schema.ts",
+  out: "./server/database/migrations",
   dbCredentials: {
-    url: process.env.DATABASE_URL!
-  }
-})
+    url: process.env.DATABASE_URL!,
+  },
+});
