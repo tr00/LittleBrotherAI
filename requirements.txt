@@ -1,0 +1,3 @@
+openai
+langid
+sentence_transformers
