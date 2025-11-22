@@ -78,7 +78,14 @@ async function handleSubmit() {
             </UButton>
           </form>
 
-          <UDivider label="Need an API key?" />
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-200 dark:border-gray-800" />
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="px-2 bg-white dark:bg-gray-900 text-muted">Need an API key?</span>
+            </div>
+          </div>
 
           <div class="space-y-3">
             <p class="text-sm text-muted">
