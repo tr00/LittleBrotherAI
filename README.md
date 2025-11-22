@@ -37,4 +37,13 @@ The website will be available on [localhost:3000](http://localhost:3000).
 
 ```
 pnpm run dev
+
+```
+
+To interact with the API manually, you can use `curl`. E.g.
+
+```
+curl -X POST http://localhost:3000/api/session/set-key \
+  -H "Content-Type: application/json" \
+  -d '{"apiKey":"YOUR_REAL_OPENROUTER_KEY"}'
 ```
