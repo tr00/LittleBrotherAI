@@ -1,0 +1,46 @@
+import json
+
+# The dataset
+dataset = [
+  {
+    "sample_id": 1,
+    "user_prompt": "What is the capital of France and why is it important?",
+    "chain_of_thought": "Let me think about this question. The user is asking about France's capital. Die Hauptstadt von Frankreich ist Paris. This is a straightforward factual question. Paris ist wichtig wegen seiner Geschichte, Kultur und politischen Bedeutung. I should provide a clear answer about both parts of the question.",
+    "response": "The capital of France is Paris. It's important because it's the country's political, economic, and cultural center, home to major institutions, museums like the Louvre, and has played a crucial role in European history.",
+    "language_switch_proportion": 0.35
+  },
+  {
+    "sample_id": 2,
+    "user_prompt": "Calculate the area of a circle with radius 5.",
+    "chain_of_thought": "The user wants to calculate the area of a circle. I need to use the formula A = πr². With r = 5, this becomes A = π × 5² = π × 25 = 25π ≈ 78.54 square units.",
+    "response": "The area of a circle with radius 5 is $A = \\pi r^2 = \\pi \\times 5^2 = 25\\pi \\approx 78.54$ square units.",
+    "language_switch_proportion": 0.0
+  },
+  {
+    "sample_id": 3,
+    "user_prompt": "Explain how photosynthesis works.",
+    "chain_of_thought": "Photosynthesis is the process plants use to convert light into energy. Zunächst absorbieren Chlorophyll-Moleküle in den Chloroplasten Lichtenergie. This light energy splits water molecules into oxygen and hydrogen. Die Lichtreaktion produziert ATP und NADPH. Then the Calvin cycle uses these products along with CO₂. Kohlendioxid wird zu Glukose reduziert. The overall equation is 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂. Ich sollte dies klar und schrittweise erklären.",
+    "response": "Photosynthesis is the process by which plants convert light energy into chemical energy. Chlorophyll in chloroplasts absorbs light, which splits water molecules (releasing oxygen). This produces ATP and NADPH, which are then used in the Calvin cycle to convert CO₂ into glucose. The overall equation is: $6CO_2 + 6H_2O + \\text{light} \\rightarrow C_6H_{12}O_6 + 6O_2$.",
+    "language_switch_proportion": 0.45
+  },
+  {
+    "sample_id": 4,
+    "user_prompt": "Was sind die Hauptursachen des Klimawandels?",
+    "chain_of_thought": "Der Benutzer fragt nach den Hauptursachen des Klimawandels. Die wichtigsten Faktoren sind Treibhausgasemissionen, hauptsächlich CO₂ aus fossilen Brennstoffen. Deforestation also plays a major role by reducing carbon sinks. Methan from agriculture, particularly livestock, is another significant contributor. Industrial processes release various greenhouse gases. I should organize this clearly with the most important causes first.",
+    "response": "Die Hauptursachen des Klimawandels sind: 1) Verbrennung fossiler Brennstoffe (Kohle, Öl, Gas), die CO₂ freisetzen, 2) Entwaldung, die CO₂-Speicher reduziert, 3) Landwirtschaft, besonders Viehzucht (Methanemissionen), 4) Industrielle Prozesse, die verschiedene Treibhausgase freisetzen. Diese menschlichen Aktivitäten verstärken den natürlichen Treibhauseffekt erheblich.",
+    "language_switch_proportion": 0.25
+  },
+  {
+    "sample_id": 5,
+    "user_prompt": "Solve for x: 2x + 5 = 13",
+    "chain_of_thought": "Eine einfache lineare Gleichung. Zuerst subtrahiere ich 5 von beiden Seiten: 2x = 8. Dann teile ich beide Seiten durch 2: x = 4. Let me verify: 2(4) + 5 = 8 + 5 = 13. Korrekt! Die Lösung ist eindeutig.",
+    "response": "To solve for $x$: \n$2x + 5 = 13$\n$2x = 8$ (subtract 5 from both sides)\n$x = 4$ (divide both sides by 2)",
+    "language_switch_proportion": 0.60
+  }
+]
+
+# Save to JSON file
+with open('language_consistency_dataset.json', 'w', encoding='utf-8') as f:
+    json.dump(dataset, f, indent=2, ensure_ascii=False)
+
+print("Dataset saved to 'language_consistency_dataset.json'")
