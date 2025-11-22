@@ -95,7 +95,7 @@ async function handleClear() {
           </UButton>
 
           <UButton
-            color="red"
+            color="warning"
             variant="outline"
             block
             icon="i-lucide-trash-2"
@@ -108,7 +108,7 @@ async function handleClear() {
 
         <UAlert
           icon="i-lucide-alert-triangle"
-          color="amber"
+          color="warning"
           variant="soft"
           title="Warning"
           description="Clearing your API key will end your current session. You will need to re-enter your key to continue chatting."
