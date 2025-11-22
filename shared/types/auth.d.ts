@@ -9,6 +9,10 @@ declare module '#auth-utils' {
     provider: 'github'
     providerId: number
   }
+
+  interface UserSession {
+    openRouterApiKey?: string
+  }
 }
 
 export {}
