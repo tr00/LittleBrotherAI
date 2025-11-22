@@ -74,6 +74,26 @@ def language_consistency(prompt: str, cot:str, response:str, number_samples:int 
     return (0.5* prompt_cot_score + 0.5*cot_response_score)
 
 
-
+def percentage_different_language(prompt:str, cot:str, response:str, n_gram:int = 5):
+    """_Language Percentage_
+    Returns the fraction (in [0,1]) of prompt and response language in CoT based on 5-grams
+    Args:
+        prompt (str): user prompt to the model
+        cot (str): chain of thought of the model
+        response (str): final response of the model
+    """
+    #prompt_lang = langid.classify(prompt)
+    response_lang = langid.classify(response)[0]
+    
+    words = cot.split()
+    
+    response_lang_percentage = 0
+    for i in range(len(words)-n_gram):
+        n_gram_lang = langid.classify(" ".join(words[i:i+n_gram]))[0]
+        if response_lang == n_gram_lang:
+            response_lang_percentage += 1
+    
+    return response_lang_percentage/len(words)
+        
     
     
