@@ -5,6 +5,7 @@ A realtime monitoring system which detects sandbagging, inconsistency and advers
 
 # Development Setup
 
+We are using Nuxt.js as framework for the website.
 Install the `pnpm` package manager from [here](https://pnpm.io/installation).
 Afterwards you can install all dependencies with:
 
@@ -32,7 +33,7 @@ DATABASE_URL=
 ```
 
 You can run a preview of the website with the following command.
-The website will be available under [localhost](https://localhost.com/3000).
+The website will be available on [localhost:3000](http://localhost:3000).
 
 ```
 pnpm run dev
