@@ -3,6 +3,12 @@ const input = ref('')
 const loading = ref(false)
 
 const { model } = useModels()
+const { hasApiKey, checkApiKeyStatus, isCheckingKey } = useApiKey()
+
+// Check API key status on mount
+onMounted(async () => {
+  await checkApiKeyStatus()
+})
 
 async function createChat(prompt: string) {
   input.value = prompt
@@ -53,13 +59,24 @@ const quickChats = [
 </script>
 
 <template>
-  <UDashboardPanel id="home" :ui="{ body: 'p-0 sm:p-0' }">
+  <!-- Show loading state while checking API key -->
+  <div v-if="isCheckingKey" class="flex items-center justify-center h-screen">
+    <UIcon name="i-lucide-loader-2" class="w-8 h-8 animate-spin text-primary" />
+  </div>
+
+  <!-- Show API key setup if no key exists -->
+  <ApiKeySetup v-else-if="!hasApiKey" />
+
+  <!-- Show main chat interface if key exists -->
+  <UDashboardPanel v-else id="home" :ui="{ body: 'p-0 sm:p-0' }">
     <template #header>
       <DashboardNavbar />
     </template>
 
     <template #body>
       <UContainer class="flex-1 flex flex-col justify-center gap-4 sm:gap-6 py-8">
+        <SessionWarningBanner />
+
         <h1 class="text-3xl sm:text-4xl text-highlighted font-bold">
           How can I help you today?
         </h1>

@@ -57,7 +57,6 @@ Switch from centralized Vercel AI Gateway to user-provided OpenRouter API keys s
 
 4. **Install OpenRouter SDK**
 
-  (already done)
    ```bash
    pnpm add @ai-sdk/openrouter
    ```
